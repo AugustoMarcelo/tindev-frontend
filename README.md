@@ -9,3 +9,7 @@
  - Será possível dar like e dislike nos usuários;
 
 ## Day 3
+  - Configuração do **BrowserRouter** e **Route** (lib *react-router-dom*) para manipular a navegação e cada rota individualmente;
+  - Configuração do **axios** para fazer a requisição ao banco de dados;
+  - Estilização das páginas de Login e da listagem de usuários do github;
+  - Implementação das funcionalidades de like e dislike;
