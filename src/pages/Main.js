@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { Link } from 'react-router-dom';
 
 import './Main.css';
@@ -13,6 +14,7 @@ export default function Main({ match }) {
   // Sempre que o estado for alterado, uma nova renderização é realizada
   const [users, setUsers] = useState([]);
 
+  // Responsável por lidar com a chamada à API
   useEffect(() => {
     async function loadUsers() {
       const response = await api.get('/devs', {
@@ -25,6 +27,17 @@ export default function Main({ match }) {
     }
 
     loadUsers();
+  }, [match.params.id]);
+
+  // Responsável por lidar com a conexão pelo protocolo websocket
+  useEffect(() => {
+    const socket = io('http://localhost:3333', {
+      query: { user: match.params.id }
+    });
+
+    socket.on('match', dev => {
+      console.log(dev);
+    })
   }, [match.params.id]);
 
   async function handleLike(id) {
