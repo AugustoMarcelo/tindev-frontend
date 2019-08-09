@@ -33,6 +33,8 @@ export default function Main({ match }) {
         user: match.params.id,
       }
     });
+
+    setUsers(users.filter(user => user._id !== id));
   }
 
   async function handleDislike(id) {
