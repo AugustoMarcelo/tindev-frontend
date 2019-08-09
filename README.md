@@ -14,3 +14,6 @@
   - Configuração do **axios** para fazer a requisição ao banco de dados;
   - Estilização das páginas de Login e da listagem de usuários do github;
   - Implementação das funcionalidades de like e dislike;
+
+## Day 4
+  - Configuração do **socket.io-client**, responsável por criar uma conexão via protocolo websocket
