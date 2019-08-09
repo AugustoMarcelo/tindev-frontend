@@ -9,10 +9,12 @@ import api from '../services/api';
 import logo from '../assets/logo.svg';
 import like from '../assets/like.svg';
 import dislike from '../assets/dislike.svg';
+import itsamatch from '../assets/itsamatch.png';
 
 export default function Main({ match }) {
   // Sempre que o estado for alterado, uma nova renderização é realizada
   const [users, setUsers] = useState([]);
+  const [matchDev, setMatchDev] = useState(null);
 
   // Responsável por lidar com a chamada à API
   useEffect(() => {
@@ -36,8 +38,8 @@ export default function Main({ match }) {
     });
 
     socket.on('match', dev => {
-      console.log(dev);
-    })
+      setMatchDev(dev);
+    });
   }, [match.params.id]);
 
   async function handleLike(id) {
@@ -87,6 +89,15 @@ export default function Main({ match }) {
         </ul>
       ) : (
         <div className="empty">Nenhum usuário encontrado...</div>
+      ) }
+      { matchDev && (
+        <div className="match-container">
+          <img src={itsamatch} alt="It's a match"/>
+          <img className="avatar" src={matchDev.avatar} alt="Dev avatar"/>
+          <strong>{matchDev.name}</strong>
+          <p>{matchDev.bio}</p>
+          <button type="button" onClick={() => setMatchDev(null)}>FECHAR</button>
+        </div>
       ) }
     </div>
   );
